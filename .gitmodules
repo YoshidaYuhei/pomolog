@@ -1,0 +1,3 @@
+[submodule "pomofront"]
+	path = pomofront
+	url = https://github.com/YoshidaYuhei/pomofront.git
