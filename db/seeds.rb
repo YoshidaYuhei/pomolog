@@ -1,0 +1,1 @@
+HealthCheck.create!(message: 'OK')

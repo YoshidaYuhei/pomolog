@@ -1,0 +1,40 @@
+create_table :health_checks,
+             force: :cascade do |t|
+  t.string :message, null: false
+  t.datetime :created_at, precision: nil, null: false
+  t.datetime :updated_at, precision: nil, null: false
+end
+
+create_table :users,
+             force: :cascade do |t|
+  t.string :username, null: true
+  t.string :email, null: false
+  t.string :password_digest, null: false
+  t.integer :role, null: false, default: 0
+  t.integer :plan, null: false, default: 0
+  t.string :password_reset_token, null: true
+  t.datetime :password_reset_sent_at, null: true
+  t.string :refresh_token, null: true
+  t.datetime :created_at, precision: nil, null: false
+  t.datetime :updated_at, precision: nil, null: false
+end
+
+create_table :devices,
+             force: :cascade do |t|
+  t.references :user, null: false, foreign_key: true
+  t.string :key, null: false
+  t.string :os_type, null: false
+  t.string :name, null: true
+  t.datetime :created_at, precision: nil, null: false
+  t.datetime :updated_at, precision: nil, null: false
+end
+
+create_table :user_profiles,
+             force: :cascade do |t|
+  t.references :user, null: false, foreign_key: true
+  t.string :name, null: false
+  t.integer :gender, null: false
+  t.integer :age, null: false
+  t.datetime :created_at, precision: nil, null: false
+  t.datetime :updated_at, precision: nil, null: false
+end
