@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < BaseController
-      skip_before_action :authenticate_by_jwt!, only: [ :create, :login, :forgot_password, :reset_password ]
+      skip_before_action :authenticate_by_jwt!, only: [ :create, :login ]
 
       def create
         user = User.new(user_params)
