@@ -12,14 +12,14 @@ class Api::V1::BaseController < ApplicationController
 
   def authenticate_by_jwt!
     header = request.headers['Authorization']
-    return unauthorized_response unless header
+    return render_auth_error unless header
 
     token = header.split(' ').last
-    return unauthorized_response unless token
+    return render_auth_error unless token
 
     begin
       decoded = JwtService.decode(token)
-      return unauthorized_response unless decoded
+      return render_auth_error unless decoded
 
       @_current_user = User.find(decoded['user_id'])
     rescue ActiveRecord::RecordNotFound

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       post 'users/login', to: 'users#login'
       post 'users/signup', to: 'users#create'
       post 'users/logout', to: 'users#logout'
+
+      resources :diaries, only: %i[create]
     end
   end
 end

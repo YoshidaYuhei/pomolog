@@ -1,18 +1,23 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: diaries
 #
-#  id                     :bigint           not null, primary key
-#  email                  :string(255)      not null
-#  password_digest        :string(255)      not null
-#  password_reset_sent_at :datetime
-#  password_reset_token   :string(255)
-#  plan                   :integer          default(0), not null
-#  refresh_token          :string(255)
-#  role                   :integer          default(0), not null
-#  username               :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id         :bigint           not null, primary key
+#  content    :string(255)      not null
+#  ended_at   :datetime         not null
+#  started_at :datetime         not null
+#  title      :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_diaries_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :diary do
