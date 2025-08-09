@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
   has_many :devices, dependent: :destroy, inverse_of: :user
   has_one :user_profile, dependent: :destroy, inverse_of: :user
+  has_many :diaries, dependent: :destroy, inverse_of: :user
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 8 }, if: :password_digest_changed?

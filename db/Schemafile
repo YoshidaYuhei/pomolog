@@ -38,3 +38,14 @@ create_table :user_profiles,
   t.datetime :created_at, precision: nil, null: false
   t.datetime :updated_at, precision: nil, null: false
 end
+
+create_table :diaries,
+             force: :cascade do |t|
+  t.references :user, null: false, foreign_key: true
+  t.string :title, null: false
+  t.string :content, null: false
+  t.datetime :started_at, null: false
+  t.datetime :ended_at, null: false
+  t.datetime :created_at, precision: nil, null: false
+  t.datetime :updated_at, precision: nil, null: false
+end
