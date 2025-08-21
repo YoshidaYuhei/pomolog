@@ -22,7 +22,7 @@ ENV RUBYOPT="--yjit"
 ENV TZ=Asia/Tokyo
 ENV BUNDLE_JOBS=4
 ENV BUNDLE_RETRY=3
-ENV BUNDLE_PATH=./vendor/bundle
+ENV BUNDLE_PATH=/app/vendor/bundle
 ENV BUNDLE_APP_CONFIG=$BUNDLE_PATH
 ENV BUNDLE_BIN=$BUNDLE_PATH/bin
 ENV BUNDLE_WITHOUT=""
@@ -47,7 +47,7 @@ RUN \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   truncate -s 0 /var/log/*log
 
-ENV PATH /root/.yarn/bin:$PATH
+ENV PATH /root/.yarn/bin:/app/vendor/bundle/bin:$PATH
 
 RUN mkdir -p /app
 
