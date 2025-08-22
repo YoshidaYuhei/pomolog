@@ -1,0 +1,48 @@
+name: Test application
+
+on:
+  pull_request:
+    branches:
+      - main
+      - hotfix-*
+      - feature-**
+env:
+  RUBY_VERSION: 3.4.1
+  RAILS_VERSION: 8.0.2
+  BUNDLER_VERSION: 2.5.1
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - '3306:3306'
+        options: >-
+          --health-cmd "mysqladmin ping --silent"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50 # git diff するために必要:最新50コミットを取得
+      - name: Rubyをセットアップ
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: gem をインストール
+        run: bundle install
+      - name: DBセットアップ
+        env:
+          RAILS_ENV: development
+        run: |
+          bundle exec rails db:create
+          bundle exec ridgepole -c config/database.yml -s primary -E development -a
+          bundle exec rails db:migrate
+      - name: テストを実行
+        run: bundle exec rspec
