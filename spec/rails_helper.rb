@@ -16,7 +16,7 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.filter_rails_from_backtrace!
   config.include Rails.application.routes.url_helpers
 
@@ -29,6 +29,9 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include RequestSpecHelper, type: :request
+
+  # Time Travel
+  config.include ActiveSupport::Testing::TimeHelpers
 end
 
 Shoulda::Matchers.configure do |config|
