@@ -16,7 +16,7 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.filter_rails_from_backtrace!
   config.include Rails.application.routes.url_helpers
 
